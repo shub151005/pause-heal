@@ -1,0 +1,304 @@
+ /* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* NEW - Palette inspired by the tree/brain artwork */
+:root {
+    --primary: #4E94A5;      /* Calming Teal */
+    --secondary: #F5F0E9;    /* Warm Cream */
+    --accent: #E87A7A;       /* Vibrant Coral */
+    --background: #F5F0E9;  /* Fallback Background */
+    --text-dark: #3A322F;    /* Dark Brown/Charcoal */
+    --text-light: #FFFFFF;   /* Clean White */
+    --card-bg: rgba(255, 255, 255, 0.9); /* Frosted Glass Effect */
+}
+
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    
+    /* NEW - Background Image Settings */
+    background-image: url('ph.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the background static on scroll */
+    background-color: var(--background); /* Fallback for when image fails to load */
+}
+
+/* NEW - Header styling for readability over the background image */
+header {
+    background-color: rgba(245, 240, 233, 0.8); /* Semi-transparent cream */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(58, 50, 47, 0.1);
+}
+
+ #navigator {
+    background-color: rgba(245, 240, 233, 0.5); /* Semi-transparent cream from your palette */
+    padding: 2rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section Title with New Primary Color */
+.section-title {
+    color: var(--text-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+/* Card Enhancements - Frosted Glass Effect */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(58, 50, 47, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    /* NEW - Frosted glass effect */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(58, 50, 47, 0.25);
+}
+
+/* Feeling Buttons with Icons - Colors harmonized with new palette */
+.feeling-button {
+    position: relative;
+    padding: 1rem 1.5rem 1rem 3.5rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3.5rem;
+    background-color: #FFFFFF; /* Solid color for readability */
+    border: 1px solid #e5e7eb;
+}
+
+.feeling-button::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 1.25rem;
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+}
+
+/* NEW - Updated Icon Colors */
+.feeling-button.anxious::before { content: '\f567'; color: #5E81AC; }
+.feeling-button.stressed::before { content: '\f7a4'; color: var(--accent); }
+.feeling-button.isolated::before { content: '\f0c0'; color: #A3BE8C; }
+.feeling-button.sleep::before { content: '\f186'; color: #695E86; }
+.feeling-button.academic::before { content: '\f19d'; color: #D08770; }
+.feeling-button.other::before { content: '\f059'; color: #4C566A; }
+
+.feeling-button:hover {
+    transform: scale(1.03);
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(58, 50, 47, 0.1);
+}
+
+/* Resource Card Icons */
+.resource-card { position: relative; }
+.resource-card::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.15;
+    color: var(--primary);
+}
+.resource-card.exam-stress::before { content: '\f02d'; }
+.resource-card.meditation::before { content: '\f6a1'; }
+.resource-card.burnout::before { content: '\f0e7'; }
+
+
+/* Modal Enhancements */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(58, 50, 47, 0.6); /* Darker backdrop */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    max-width: 600px;
+    width: 90%;
+    text-align: left;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(46, 52, 64, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-content h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.75rem;
+}
+
+/* Toast notification styles - Updated Colors */
+.toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1001;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    color: var(--text-light);
+    font-weight: 500;
+    box-shadow: 0 10px 15px -3px rgba(46, 52, 64, 0.2);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: translateY(120%);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.toast::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.toast.bg-green-500 { background-color: var(--primary); }
+.toast.bg-yellow-500 { background-color: #EBCB8B; }
+.toast.bg-blue-500 { background-color: #5E81AC; }
+.toast.bg-green-500::before { content: '\f058'; }
+.toast.bg-yellow-500::before { content: '\f071'; }
+.toast.bg-blue-500::before { content: '\f05a'; }
+.toast.show { transform: translateY(0); }
+
+/* General Button Styles */
+button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+button:hover { transform: translateY(-2px); }
+button:active { transform: translateY(0); }
+button:focus {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+#bookBtn {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+/* Make forum placeholder posts stand out */
+#support .bg-gray-100 {
+    background-color: rgba(245, 240, 233, 0.7);
+}
+
+/* Other minor tweaks below... */
+/* ... (rest of the original unchanged CSS for animations, responsiveness, etc.) ... */
+.activity-btn {
+    position: relative;
+    padding-left: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: left;
+}
+.activity-btn::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 1rem;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+@media (max-width: 640px) {
+    .modal-content {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+    .feeling-button {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+    }
+    .activity-btn {
+        padding-left: 2.5rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+@media print {
+    .modal, #bookBtn, button, .toast {
+        display: none !important;
+    }
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+
